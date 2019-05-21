@@ -1,0 +1,76 @@
+//750原稿px转换为rem, 配合flexbile使用
+/* 用例
+* @include px2rem(width, 100);
+* @include px2rem(margin, 0 100 20 30);
+*/
+@mixin px2rem($props, $sizes, $base:$base_ui_size) {
+  $values: ();
+  $sublists: false;
+
+  @each $s in $sizes {
+    @if type-of($s)==list {
+      $sublists: true;
+      $vv: ();
+
+      @each $ss in $s {
+        $vv: append($vv, if(type-of($ss)==number, #{$ss / $base}rem, $ss));
+      }
+
+      $values: append($values, join((), $vv));
+    }
+
+    @else {
+      $values: append($values, if(type-of($s)==number, #{$s / $base}rem, $s));
+    }
+  }
+
+  $value: join((), $values, if($sublists, comma, space));
+
+  @each $prop in $props {
+    #{$prop}: $value
+  }
+}
+
+//原稿字体转换
+/*
+* 用例
+* @include fontSize(12px);
+*/
+@mixin fontSize($font-size) {
+
+  font-size: $font-size;
+
+  [data-dpr="2"] & {
+    font-size: $font-size * 2;
+  }
+
+  [data-dpr="3"] & {
+    font-size: $font-size * 3;
+  }
+}
+
+// 多行省略
+@mixin rowHide ($num: 2) {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $num;
+  overflow: hidden;
+}
+
+// 滚动
+@mixin overflowY {
+  overflow-y: scroll !important;
+  -webkit-overflow-scrolling: touch;
+}
+
+@mixin overflowX {
+  overflow-x: scroll !important;
+  -webkit-overflow-scrolling: touch;
+}
+
+// 文字省略号
+@mixin txtOverflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

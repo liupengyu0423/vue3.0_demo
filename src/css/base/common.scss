@@ -1,0 +1,52 @@
+/**
+ * Created by sunchengbin
+ * 项目中通用的东西
+ */
+body,
+button,
+input,
+select,
+textarea {
+  font: 'Myriad Set Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  @include fontSize(12px);
+  color: $base_font_color;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
+}
+
+img {
+  width: 100%;
+  vertical-align: middle;
+}
+
+.block {
+  display: block;
+}
+
+.clearfix:after {
+  content: '\20';
+  display: block;
+  height: 0;
+  clear: both;
+}
+
+.clearfix {
+  *zoom: 1;
+}
+
+// 图片懒加载区块样式
+.lazy {
+  height: 0;
+  padding-top: 100%;
+  background-repeat: no-repeat;
+  background-color: $lazy_bg_color;
+  background-size: contain;
+}
